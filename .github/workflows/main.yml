@@ -43,9 +43,9 @@ jobs:
             ssh-add ~/.ssh/senpro-ssh-3
             echo "Cek folder project";
             
-            [ ! ~d "${HOME}/senpro/463596/modu02/senpro-github-action/* ] &&
+            [ ! ~d "${HOME}/senpro/463596/modu02/senpro-github-action/" ] &&
               {
-                echo “Repository belus di-clone. Cloning... ";
+                echo “Repository belum di-clone. Cloning... ";
                 mkdir -p ~/senpro/463596/modul02;
                 cd ~/senpro/463596/modul02;
                 git clone https://github.com/chrstnale/senpro-github-action;
