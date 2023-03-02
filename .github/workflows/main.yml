@@ -43,11 +43,14 @@ jobs:
             echo "Cek folder project";
             [ ! ~d "${HOME}/senpro/463596/modul02/senpro-github-action/" ] &&
             {
-              cd ~/senpro/463596/modul02/senpro-github-action
-              git restore .
-              git pull origin main
-              npm install
-              npm run build
+              echo "Repository belum di-clone. Cloning... ";
+              mkdir -p ~/senpro/463596/modul02;
+              cd ~/senpro/463596/modul02;
+              git clone https://github.com/chrstnale/senpro-github-action;
+              cd ~/senpro/463596/modul02/senpro-github-action;
+              echo "Install Package dan Butld Project";
+              npm install;
+              npm run build;
             } ||
             {
               echo "Repository sudah ada. Building...";
