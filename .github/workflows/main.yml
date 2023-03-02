@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        node-versiono: [16.x]
+        node-version: [16.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -21,29 +21,29 @@ jobs:
           cache: "npm"
       - run: npm i
       - run: npm run build
-   deploy:
-     needs: test-build
-     runs-on: ubuntu-latest
+
+  deploy:
+    needs: test-build
+    runs-on: ubuntu-latest
      
-     strategy:
-       matrix:
-         node-version: [16.x]
+    strategy:
+      matrix:
+        node-version: [16.x]
          
-     steps:
-       - name: Build app on VM
-         uses: appleboy/ssh-action@master
-         with:
-           host: ${{  secrets.HOST  }}
-           username: ${{  secrets.USERNAME }}
-           password: ${{  secrets.PASSWORD }}
-           port: ${{  secrets.PORT }}
-           script: |
+    steps:
+      - name: Build app on VM
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{  secrets.HOST  }}
+          username: ${{  secrets.USERNAME }}
+          password: ${{  secrets.PASSWORD }}
+          port: ${{  secrets.PORT }}
+          script: |
             eval "$(ssh-agent -s)"
             ssh-add ~/.ssh/senpro-ssh-3
             echo "Cek folder project";
             
-            eval "$(ssh-agent -s)"
-            [ ! ~d "${HOME}/senpro/463596/modu162/senpro-github-action/* ] &&
+            [ ! ~d "${HOME}/senpro/463596/modu02/senpro-github-action/* ] &&
               {
                 echo “Repository belus di-clone. Cloning... ";
                 mkdir -p ~/senpro/463596/modul02;
@@ -51,7 +51,7 @@ jobs:
                 git clone https://github.com/chrstnale/senpro-github-action;
                 cd ~/senpro/463596/modul02/senpro-github-action;
                 echo “Install Package dan Butld Project";
-                npm tnstall;
+                npm install;
                 npm run build;
               } ||
               {
